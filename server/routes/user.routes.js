@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
+const ApiResponse = require('../utils/ApiResponse')
 const {
   getAllUsers,
   getUserById,
@@ -27,7 +27,11 @@ router.use(authenticate)
 
 // Profile route — any authenticated user
 //can edit or update their own details
-router.get('/profile', getMe)
+router.get('/profile', (req, res) => {
+  res.status(200).json(
+    new ApiResponse(200, { user: req.user }, 'Profile fetched successfully')
+  )
+})
 router.patch(
   '/profile',
   updateProfileValidator,
