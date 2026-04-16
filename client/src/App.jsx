@@ -17,7 +17,15 @@ const App = () => {
   return (
     <AuthProvider>
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <Toaster position="top-right" />
+       <Toaster
+  position="top-right"
+  toastOptions={{
+    duration: 3000,
+    error: {
+      duration: 5000
+    }
+  }}
+/>
         <Routes>
 
           {/* Public */}
