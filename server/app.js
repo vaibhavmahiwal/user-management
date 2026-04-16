@@ -12,8 +12,8 @@ const logger = require('./utils/logger')
 
 // Security headers
 app.use(helmet())
-
-// CORS
+app.set('trust proxy', 1)
+// for avoiding core issues
 app.use(
   cors({
     origin: process.env.CLIENT_URL, // Remove || '*' for production to keep it secure
