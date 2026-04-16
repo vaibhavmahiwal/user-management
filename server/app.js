@@ -3,11 +3,12 @@ const cors = require('cors')
 const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
 
+
+const app = express()
 const routes = require('./routes/index')
 const errorHandler = require('./middleware/errorHandler')
 const logger = require('./utils/logger')
 
-const app = express()
 
 // Security headers
 app.use(helmet())
@@ -15,9 +16,10 @@ app.use(helmet())
 // CORS
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || '*',
+    origin: process.env.CLIENT_URL, // Remove || '*' for production to keep it secure
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // Crucial if you use cookies or specific Auth headers
   })
 )
 
