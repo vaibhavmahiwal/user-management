@@ -1,0 +1,15 @@
+services:
+  backend:
+    build: ./server
+    ports:
+      - "10000:10000"
+    env_file: ./server/.env 
+
+  frontend:
+    build: ./client
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:10000/api
+    depends_on:
+      - backend
