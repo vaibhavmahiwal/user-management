@@ -19,6 +19,13 @@ const Login = () => {
     setError('')
   }
 
+  // --- NEW FUNCTION: Auto-fills the form ---
+  const handleQuickFill = (email, password) => {
+    setForm({ email, password });
+    setError('');
+    toast.success(`${email.split('@')[0]} credentials loaded!`);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -95,7 +102,7 @@ const Login = () => {
               style={{
                 width: '100%', padding: '0.75rem 1rem',
                 border: '1px solid #e5e7eb', borderRadius: '6px',
-                fontSize: '0.95rem'
+                fontSize: '0.95rem', boxSizing: 'border-box'
               }}
             />
           </div>
@@ -114,7 +121,7 @@ const Login = () => {
               style={{
                 width: '100%', padding: '0.75rem 1rem',
                 border: '1px solid #e5e7eb', borderRadius: '6px',
-                fontSize: '0.95rem'
+                fontSize: '0.95rem', boxSizing: 'border-box'
               }}
             />
           </div>
@@ -135,16 +142,37 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Test accounts hint */}
+        {/* --- UPDATED: Clickable Test Accounts --- */}
         <div style={{
           marginTop: '1.5rem', padding: '1rem',
           background: '#f1f5f9', borderRadius: '6px',
           fontSize: '0.8rem', color: '#64748b'
         }}>
-          <strong style={{ display: 'block', marginBottom: '0.4rem' }}>Test Accounts:</strong>
-          admin@test.com / Admin@123<br />
-          manager@test.com / Manager@123<br />
-          user@test.com / User@123
+          <strong style={{ display: 'block', marginBottom: '0.6rem' }}>Test Accounts (Click to fill):</strong>
+          
+          <button 
+            type="button" 
+            onClick={() => handleQuickFill('admin@test.com', 'Admin@123')}
+            style={{ background: 'none', border: 'none', color: '#3b82f6', cursor: 'pointer', padding: '2px 0', display: 'block', fontSize: '0.8rem' }}
+          >
+            🚀 Admin: admin@test.com / Admin@123
+          </button>
+
+          <button 
+            type="button" 
+            onClick={() => handleQuickFill('manager@test.com', 'Manager@123')}
+            style={{ background: 'none', border: 'none', color: '#10b981', cursor: 'pointer', padding: '2px 0', display: 'block', fontSize: '0.8rem' }}
+          >
+            📊 Manager: manager@test.com / Manager@123
+          </button>
+
+          <button 
+            type="button" 
+            onClick={() => handleQuickFill('user@test.com', 'User@123')}
+            style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', padding: '2px 0', display: 'block', fontSize: '0.8rem' }}
+          >
+            👤 User: user@test.com / User@123
+          </button>
         </div>
       </div>
     </div>
